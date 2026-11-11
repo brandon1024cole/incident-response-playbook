@@ -1,7 +1,7 @@
 # Incident Response Playbook: Identity Compromise with Lateral Movement
 
-A playbook and tabletop exercise for a fictional mid-size company,
-structured on the CompTIA CySA+ (CS0-004) incident response lifecycle.
+A playbook and tabletop exercise for a fictional mid-size company 
+structured on the Incident Response Lifecycle
 
 > All organizations, people, and data in this repo are fictional.
 
