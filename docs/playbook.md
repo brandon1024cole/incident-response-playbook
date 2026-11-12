@@ -6,7 +6,7 @@ Harborline Freight Partners (fictional organization)
 
 | Field | Value |
 | :---- | :---- |
-| Version | 0.1 |
+| Version | 0.1.1 |
 | Author | Brandon Cole |
 | Framework | CompTIA CySA+ CS0-004 incident response lifecycle (7 phases), mapped to NIST SP 800-61 Rev. 3 / CSF 2.0 |
 | Status | Scoping |
