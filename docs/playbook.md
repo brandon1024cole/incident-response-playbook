@@ -63,8 +63,61 @@ The steps in this playbook are to be followed when there is a credible suspicion
 
 # **2\. Organization Profile**
 
-*PENDING — company overview, crown jewels, technology stack, known gaps.*
+## **2.1 Business overview** 
 
+Harborline is a freight brokerage company with about 520 employees. The workforce is primarily hybrid, although the HQ is located in Baltimore, MD, along with 3 other regional offices. Regular business hours are 9:00 AM to 5:00 PM.
+
+Harborline runs on a Transportation Management System (TMS), and if that goes down, then no trucks can get booked.
+
+## **2.2 Critical assets**
+
+| Asset | Notes |
+| ----- | ----- |
+| **SQL01** | The TMS database server, the crown jewel of the company. If this is compromised, it would interrupt business processes. |
+| **DC01/02** | Domain controllers that manage and authenticate every account and machine in the domain. Can control everything in AD |
+| **Cloud Identity \+ MFA** | Allows users to log in and verify their identity. The company’s IAM and directory service (Entra ID). |
+| **FS02** | Internal file server on a legacy system that contains financial records for the organization |
+
+## **2.3 Identity architecture**
+
+Active Directory manages local infrastructure, network assets, and file shares. It connects to Entra ID through Entra Connect, using password hash-sync. This means a user’s on-premises password and cloud password are the same.
+
+MFA is used as an additional layer of security for logins. It is a push notification for most employees; only admin accounts use FIDO2 keys for MFA.
+
+Harborline conditional access policies require MFA for all sign-ins and block only high-risk sign-ins.
+
+For remote access to organizational servers and materials, a VPN is used, which authenticates using Entra ID. Devices do not have to be screened or managed by the organization to connect.
+
+## **2.4 Security tools and log sources**
+
+| Tool | What it Does | Known Gaps |
+| ----- | ----- | ----- |
+| **Microsoft Sentinel** | Central place to search and correlate all sources below, build a timeline, and manage incidents | Only sees sources connected to it; anything not forwarded from the sources below is invisible |
+| **Entra ID sign-in logs** | Monitors who signed in, from where, and at what time. Also tells what device and browser, which app, whether MFA passed, as well as the sign-in risk level | A replayed stolen session can look like a normal, successful sign-in with MFA satisfied |
+| **Entra ID audit logs** | Monitors changes to identities: MFA methods added or removed, password resets, group and role changes, app permissions | Shows *that* an MFA method was added; attacker-registered methods look like normal user changes, so this cannot be the only cause for escalation |
+| **Entra ID Protection**  | Risky sign-ins and risky users, with the reason | Medium-risk sign-ins are only logged, not blocked; flagged sign-ins can go unreviewed if the queue is not monitored |
+| **Office 365 audit log** | Monitors mailbox and file activity: inbox rules created, files searched for and downloaded, sharing changes | None known |
+| **Defender for Office 365**  | Who received a given email, whether it was delivered or blocked, and who clicked the link | Can miss phishing links on new domains with no reputation yet |
+| **VPN logs** | Displays which user connected, from what public IP, which **internal IP** they were assigned, and when, linking network activity back to a user | Shows who connected but not what they did |
+| **Defender for Endpoint**  | Processes, network connections, and logons on managed machines; alerts for credential dumping and pass-the-hash; can isolate a device | The legacy file server does not run EDR |
+| **Defender for Identity** | Watches domain controller traffic for reconnaissance, pass-the-hash and pass-the-ticket, Kerberoasting, and suspicious group changes | None known |
+| **Windows Security Event logs** | Logons and their type (network, Remote Desktop), accounts created, group membership changes | Doesn’t log processes or commands run |
+
+## **2.5 Security team and coverage hours**
+
+The security team has 3 people: 2 SOC Analysts and one Security Manager, along with 8 IT Operations team members. 
+
+Outside of business hours, a MDR provides 24x7 monitoring and phones the on-call analyst for high-severity alerts. The MDR does not take containment/eradication related actions.
+
+## **2.6 Known limitations**
+
+| Asset | Vulnerability | Impact on Response |
+| :---- | :---- | :---- |
+| MFA | Users can register new MFA methods from anywhere once logged in. MFA for most employees is push-based and is vulnerable to AiTM attacks. | Resetting an account password won’t evict the attacker; responders must also revoke sessions and reinforce new MFA |
+| Servers | Every server shares the same local administrator password | Large blast radius; if we know the adversary got into one server, we know they have the means to get into all |
+| Users | Some admins use the same account for daily work and admin tasks | If an adversary gets access to an admin’s daily account, it must be considered a domain-level compromise |
+| Legacy File Server | The legacy file server with the financial files still offers remote desktop access and has no EDR | Analysts will have to collect native Windows logs manually |
+| VPN  | Devices do not need to be managed in any way to connect | Devices connected over VPN may have no EDR; investigators must rely on VPN and server logs, and containment must include ending active VPN sessions. |
 # **3\. Roles and Responsibilities** 
 
 *PENDING — IR team roster and RACI chart.*
