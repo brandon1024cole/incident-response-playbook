@@ -161,19 +161,27 @@ Outside of business hours, a MDR provides 24x7 monitoring and phones the on-call
 
 # **5\. Incident Response Lifecycle** 
 
-Each phase follows the same structure:
-
-* Entry criteria: what must be true to begin this phase
-
-* Actions: who does what, with decision points
-
-* Exit criteria: what must be true to move to the next phase
-
 ## **5.1 Preparation** 
 
-What must be in place before an incident: people, tools, logging, access, training.
+Preparation is ongoing and is not triggered by an incident. This section is reviewed once a year and after every High or Critical incident.
 
-*PENDING*
+People:
+1.  Rotating team of on-call Security Analysts trained on this playbook, so that MDR alerts and High and Critical incidents can be addressed 24/7
+2.  IT operations team trained on this playbook and aware of where to find it
+3.  Contact list for the Incident Commander (including a backup), legal team, finance team, communications team, and the business owner. Stored somewhere that is still accessible if email and AD are down
+
+Process:
+1.  An out-of-band communications channel, separate from normal organizational communication methods and tested before an incident 
+2.  Identity verification procedures for password resets and re-registering MFA. For example, an in-person or virtual ID check against HR records and a call back to the number on file
+3.  Evidence handling procedures are documented, and staff are aware and trained on what to do
+4.  A tabletop discussion on using this playbook, once a year
+
+Technology:
+1.  The log sources are connected to the SIEM and are kept for at least 90 days. 
+2.  EDR is installed on all workstations and servers and can isolate a device remotely. Devices with no EDR have some way to be isolated from the network in case quarantine is needed.
+3.  IT Operations can revoke sessions, disable accounts, remove/disable MFA methods, and remove inbox rules in the cloud and Active Directory.
+4.  Backups of file servers, domain controllers, and the crown jewel are taken regularly, ensuring that the Recovery Point Objective can be achieved
+5.  A written procedure for KRBTGT double reset
 
 ## **5.2 Detection**
 
@@ -266,8 +274,7 @@ Exit Criteria: 
 *   All containment actions have been documented and added to the incident record
 *   All logs and related sources have been preserved as evidence
 
-**5.5 Eradication**
--------------------
+## **5.5 Eradication**
 
 Entry Criteria: Containment exit criteria met.
 
@@ -296,8 +303,7 @@ Exit Criteria: 
 *   All actions documented.
     
 
-**5.6 Recovery**
-----------------
+## **5.6 Recovery**
 
 Entry Criteria: All Eradication exit criteria are met.
 
@@ -323,9 +329,26 @@ Exit Criteria: 
 
 ## **5.7 Post-Incident Activity**
 
-Lessons learned, root cause analysis, corrective actions, metrics.
+Entry Criteria: The Incident Commander has closed the incident.
 
-*PENDING*
+1.  Incident Commander, IT Operations, and Security Analysts hold a “Lessons Learned” meeting within 1 week. Include the business owner and legal team for High and Critical Incidents. Remember that the meeting is blameless. Ask:
+    1.  What went well?
+    2.  What was slow or confusing?
+    3.  What did we not have that would’ve helped prevent this or minimize damage?
+        
+2.  Security Analyst constructs an after-action report. This includes the timeline, root cause, impact, decisions made, and metrics (time to detect, respond, contain, recover)
+    
+3.  Incident Commander, IT Operations, and Security Analysts decide on corrective actions and what needs to change to prevent this from happening again. Each action is assigned to a responsible party along with a projected due date. If any risks are accepted, they must be approved by the business owner.
+    
+4.  Security Analyst and IT Operations update the playbook based on where it fell short. Add new rules and IOCs with threat intelligence partners.
+    
+5.  Legal team determines how long to keep evidence for in coordination with the security analyst. 
+    
+Exit Criteria:
+*   After-action report approved by the Incident Commander
+*   Corrective actions assigned and tracked to completion
+*   Playbook and detections updated
+*   Evidence retention decided
 
 # **6\. MITRE ATT\&CK Mapping** 
 *PENDING — techniques observed in this scenario and the detection or log source for each.*
