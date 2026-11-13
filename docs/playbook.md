@@ -148,7 +148,16 @@ Outside of business hours, a MDR provides 24x7 monitoring and phones the on-call
 | Lessons learned / after-action report | A/R | R | C | C | C | C | C | I |
 # **4\. Severity Classification**
 
-*PENDING — Low / Medium / High / Critical criteria and escalation timelines.*
+| Level | Criteria | Generic Example | Response Target | Who to Notify |
+| ----- | ----- | ----- | ----- | ----- |
+| Low | Suspicious sign-in activity; no evidence the attacker got in | User reports password reset attempts | Next business day | IT Team / Security Analyst |
+| Medium | Attempted compromise, or a suspected single compromised account still being investigated | Unusual logins with impossible travel, new devices connected via VPN, MFA prompts without request from user | 1.5 hours, 24/7 | IC / Security Analyst / IT Team |
+| High  | Confirmed compromise of a standard account, or lateral movement to non-critical systems, or sensitive data accessed or changed | Newly registered MFA method, inbox rules hiding emails, replayed session confirmed, remote logons from the compromised account to non-critical servers, credential dumping on a server | 30 mins, 24/7 | IC / Security Analyst / Legal Counsel / IT Team |
+| Critical | Privileged or domain-level compromise, or access to crown-jewel systems, or sensitive data stolen, or business operations disrupted | Crown jewel server or domain controllers have been accessed, new account created or added to a privileged group |  15 mins, 24/7 | IC / Legal Counsel / Finance Lead / CFO / IT Team / Communications team |
+
+- When a situation fits criteria for two different severity levels or when the evidence is unclear, choose the higher level. It is better to overreact and be wrong rather than to underreact and be wrong.   
+- Severity is reassessed upon every new finding, and every hour for high and critical severity incidents  
+- IT Ops, Security Analysts, and the IC can raise severity, but only the IC and Security Analysts can lower it
 
 # **5\. Incident Response Lifecycle** 
 
