@@ -120,8 +120,32 @@ Outside of business hours, a MDR provides 24x7 monitoring and phones the on-call
 | VPN  | Devices do not need to be managed in any way to connect | Devices connected over VPN may have no EDR; investigators must rely on VPN and server logs, and containment must include ending active VPN sessions. |
 # **3\. Roles and Responsibilities** 
 
-*PENDING — IR team roster and RACI chart.*
+| Role | Who | Responsibilities |
+|------|-----------------|------------------|
+| **Incident Commander** | Security Manager | Owns the incident, declares severity, makes containment calls, runs bridge calls |
+| **Lead Analyst** | Security Analyst | Triage, investigation, timeline, evidence collection|
+| **Identity / IT Ops Lead** | IT Systems Administrator | Executes account actions (reset, revoke sessions, block), mail rule removal |
+| **MDR Provider** | External SOC | 24x7 detection, initial triage, escalation to IC |
+| **Communications Lead** | Director of Marketing & Comms | Internal comms, customer/carrier messaging (approved by Legal) |
+| **Legal Counsel** | General Counsel + outside breach counsel | Privilege, notification obligations, law enforcement contact |
+| **Finance Lead** | Controller | Payment holds, bank recall requests, vendor banking verification |
+| **Executive Sponsor** | CIO (CFO for financial-loss incidents) | Approves business-impacting decisions, board/insurer communication |
 
+## RACI Chart
+
+*R = Responsible (does the activity) · A = Accountable · C = Consulted · I = Informed*
+ 
+| Activity | IC | Analyst | IT Ops | MDR | Comms | Legal | Finance | Exec |
+|----------|----|---------|--------|-----|-------|-------|---------|------|
+| Initial triage & validation | A | R | – | R | – | – | – | – |
+| Declare incident & severity | A/R | C | – | C | – | I | – | I |
+| Contain compromised account | A | C | R | C | – | – | – | I |
+| Freeze / recall payments | C | – | – | – | – | C | A/R | I |
+| Evidence collection & preservation | A | R | C | C | – | C | – | – |
+| Determine notification obligations | C | C | – | – | C | A/R | – | I |
+| External communication | C | – | – | – | R | A | C | I |
+| Eradication & recovery | A | R | R | C | – | – | – | I |
+| Lessons learned / after-action report | A/R | R | C | C | C | C | C | I |
 # **4\. Severity Classification**
 
 *PENDING — Low / Medium / High / Critical criteria and escalation timelines.*
