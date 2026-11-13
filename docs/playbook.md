@@ -6,7 +6,7 @@ Harborline Freight Partners (fictional organization)
 
 | Field | Value |
 | :---- | :---- |
-| Version | 0.1.1 |
+| Version | 0.1 |
 | Author | Brandon Cole |
 | Framework | CompTIA CySA+ CS0-004 incident response lifecycle (7 phases), mapped to NIST SP 800-61 Rev. 3 / CSF 2.0 |
 | Status | Scoping |
@@ -211,7 +211,7 @@ Entry criteria: Detection exit criteria met
     1.  If all activity is explained and suspicions of compromise can be dismissed without a reasonable doubt, close and record the evidence and reason.
     2.  If not, continue.
         
-3.  Preserve logs and system evidence per Section 8 before manual inspection
+3.  Security Analyst preserve logs and system evidence per Section 8 before manual inspection
     
 4.  Security Analyst measures the scope (credential dumping, associated logins on separate users/devices/servers)
     
@@ -220,7 +220,7 @@ Entry criteria: Detection exit criteria met
     1.  If crown jewels or domain controllers have evidence of being accessed, escalate to Critical severity and notify corresponding groups (Section 4)
     2.  If non-critical assets have evidence of being accessed, escalate to High severity and notify corresponding groups (Section 4)
         
-6.  Security Analyst identifies the initial access vector, then searches for other users exposed to it; repeats steps 1-4 for every new account or system
+6.  Security Analyst identifies the initial access vector, then searches for other users exposed to it; repeats steps 1-5 for every new account or system
     
 7.  Security Analyst adds all IOCs and updated timeline to the incident record 
     
@@ -235,9 +235,36 @@ Exit criteria:
 
 ## **5.4 Containment** 
 
-Stop the attacker's movement: isolate accounts, sessions, and hosts.
+Entry Criteria: Analysis exit criteria met, or Incident Commander authorizes early containment due to High or Critical severity
 
-*PENDING*
+1.  Incident Commander moves all communication out-of-band
+    
+2.  Security Analyst preserves all logs of attacker activity for future use (legal)
+    
+3.  Incident Commander and IT Operations review the scope list and incident record from Analysis. Decide a plan of action with the business owners about the crown jewel. Incident Commander approves the plan; all actions are executed together so the attacker isn’t warned.
+    
+4.  IT Operations disables compromised privileged and attacker-created accounts.  
+    
+5.  IT Operations changes the shared local admin password. 
+    
+6.  IT Operations blocks known attacker IPs and disables VPN sessions for associated accounts. Focus on privileged and attacker-created accounts. 
+    
+7.  IT Operations revokes active sessions (cloud and AD) and forces a password reset of all other associated accounts. Then disables all MFA sources and blocks known attacker IPs.
+    
+8.  IT Operations disables active email sessions for associated accounts and removes all new rules the attacker established.
+    
+9.  IT Operations isolates associated endpoint devices and servers using EDR, and isolates devices without EDR on a separate VLAN.
+    
+10.  Security Analyst verifies containment by monitoring logs for known IOCs or activity from known malicious IPs
+    1.  If activity continues, go back to 5.3 Analysis
+    2.  If not, continue
+        
+11.  IT Operations records all actions taken as they happen, including the time and who on the team did them 
+    
+Exit Criteria: 
+*   Containment verified: no known attacker access remains
+*   All containment actions have been documented and added to the incident record
+*   All logs and related sources have been preserved as evidence
 
 ## **5.5 Eradication**
 

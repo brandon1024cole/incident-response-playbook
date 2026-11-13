@@ -7,7 +7,7 @@ structured on the Incident Response Lifecycle
 
 ## Status
 - [x] Project scoping
-- [ ] Organization profile
-- [ ] Playbook v1.0
+- [X] Organization profile
+- [X] Playbook v1.0
 - [ ] Tabletop exercise
 - [ ] After-action report and playbook v1.1
