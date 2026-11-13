@@ -266,17 +266,60 @@ Exit Criteria: 
 *   All containment actions have been documented and added to the incident record
 *   All logs and related sources have been preserved as evidence
 
-## **5.5 Eradication**
+**5.5 Eradication**
+-------------------
 
-Remove attacker access and persistence; fix the root cause.
+Entry Criteria: Containment exit criteria met.
 
-*PENDING*
+1.  Security Analyst compares with persistence checks in Analysis phase and searches for things Analysis may have missed
+    1.  Cloud: OAuth app consents, new app registrations, forwarding rules, MFA methods on other accounts.
+    2.  On-premises: new accounts, scheduled tasks, services, and changes to admin groups.
+    3.  If a new persistence shows up, contain it (5.4) and run analysis (5.3) on it.
+        
+2.  IT Operations forces password resets and removes any remaining forms of persistence: new user accounts (normal and privileged), new rules, new MFA sources added.
+    
+3.  Incident Commander and business owner approve a time to reset servers. IT Operations rebuilds the file server and crown jewel from a known clean backup that predates the compromise.
+    
+4.  Incident Commander approves a KRBTGT reset, and IT Operations performs it to make sure no new Kerberos tickets can be forged.
+    1.  Reset once and wait for tickets to expire and for the new change to replicate so that we don’t break old, legitimate tickets across the whole domain.
+    2.  Reset twice to push out the previously saved (and potentially compromised) hash.
+        
+5.  Security Analyst identifies which weaknesses (Section 2.6 ) enabled the attack. IT Operations remediates them.
+    1.  If a fix can’t currently be completed, the Incident Commander records it as a Post-Incident corrective action with an owner and a due date, or as an accepted risk.
+        
+6.  Security Analyst documents all changes and steps taken as they go.
+    
+Exit Criteria: 
+*   Eradication confirmed: all known persistence and access are removed.
+*   Compromised systems rebuilt or verified clean.
+*   Root cause remediated, or tracked as an accepted risk with owner approval.
+*   All actions documented.
+    
 
-## **5.6 Recovery**
+**5.6 Recovery**
+----------------
 
-Restore and verify systems and accounts; release them from isolation; monitor.
+Entry Criteria: All Eradication exit criteria are met.
 
-*PENDING*
+1.  Security Analyst and IT Operations validate servers are clean in an isolated environment before putting them back in production. This validation is approved by the Incident Commander, and only then can the restored servers be returned to production.
+    1.  Domain controllers first because they authenticate everything else. Then the crown jewel, then everything else.
+    2.  Business owner confirms that the services work
+    
+2.  After validation and approval from the Incident Commander, IT Operations releases endpoint stations from Isolation
+    
+3.  IT Operations verify the identity of users by performing an ID check against HR records. Then restore user accounts and enforce new MFA. Send users a new account link through out-of-band communication methods. Enforce admins to use separate accounts for daily and admin tasks.
+    
+4.  Security Analyst monitors for similar IOCs for the next 30 days, as this is when attackers are most likely to reattempt attacks.
+    1.  If attack activity re-emerges, return to Analysis (5.3)
+        
+5.  Security Analyst and IT Operations document all recovery steps as they go.
+    
+
+Exit Criteria: 
+*   Business operations are back to where they were pre-incident
+*   Monitoring window has passed with no recurrence 
+*   All recovery steps have been recorded
+*   IC approves closing the incident
 
 ## **5.7 Post-Incident Activity**
 
