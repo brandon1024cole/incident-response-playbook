@@ -177,9 +177,28 @@ What must be in place before an incident: people, tools, logging, access, traini
 
 ## **5.2 Detection**
 
-How the incident is first noticed: alert sources, user reports, MDR escalation.
+Entry Criteria: Any trigger listed in Section 1 
 
-*PENDING*
+1.  Security Analyst acknowledges the report and creates an incident record to start building a timeline. 
+    
+2.  Make sure this incident is within IAM and lateral movement scope and not another related incident. They also assign an initial severity.
+    
+3.  If the signal alone meets High or Critical (Section 4): assign that severity and notify the IC immediately, then verify.
+    
+4.  Security Analyst reaches out to the specific user (out-of-band) to confirm whether or not the activity was theirs.
+    
+    1.  Record “yes or no”; can be used to make a timeline in later steps
+        
+5.  Check for corresponding data to match user answer (known travel, usual device, approved IT change)
+    
+    1.  If the activity is fully explained, close and record evidence and reason
+    2.  If not, **continue**  
+
+6.  Security Analyst notifies the roles listed according to Section 4.
+
+Exit criteria:  
+*   If the suspicion is ruled out as fully explained. 
+*   If suspicion of an attack is not ruled out. Incident record open, initial severity assigned, required roles notified.
 
 ## **5.3 Analysis**
 
