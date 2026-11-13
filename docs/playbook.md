@@ -202,9 +202,36 @@ Exit criteria:  
 
 ## **5.3 Analysis**
 
-Validate, scope, build the timeline, and assign severity.
+Entry criteria: Detection exit criteria met
 
-*PENDING*
+1.  Security Analyst pulls sign-in data for the targeted user or access data from the targeted system from logs
+    
+2.  Security Analyst tracks sign-in path and timeline (IP, user, session, MFA requests, device, time, VPN logs) 
+    
+    1.  If all activity is explained and suspicions of compromise can be dismissed without a reasonable doubt, close and record the evidence and reason.
+    2.  If not, continue.
+        
+3.  Preserve logs and system evidence per Section 8 before manual inspection
+    
+4.  Security Analyst measures the scope (credential dumping, associated logins on separate users/devices/servers)
+    
+5.  Security Analyst measures the impact and persistence (new MFA methods, inbox rules, password resets, group changes, files and servers accessed)
+    
+    1.  If crown jewels or domain controllers have evidence of being accessed, escalate to Critical severity and notify corresponding groups (Section 4)
+    2.  If non-critical assets have evidence of being accessed, escalate to High severity and notify corresponding groups (Section 4)
+        
+6.  Security Analyst identifies the initial access vector, then searches for other users exposed to it; repeats steps 1-4 for every new account or system
+    
+7.  Security Analyst adds all IOCs and updated timeline to the incident record 
+    
+8.  Security Analyst reassesses severity and notifies the roles listed according to Section 4
+    
+
+For High or Critical incidents, the IC may begin containing confirmed accounts while scoping continues.
+
+Exit criteria:
+*   If all activity is explained, and compromise can be ruled out without a reasonable doubt
+*   If the compromise is confirmed and the full scope of affected systems and users has been determined
 
 ## **5.4 Containment** 
 
