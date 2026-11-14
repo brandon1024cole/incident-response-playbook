@@ -374,7 +374,7 @@ Before isolating, rebooting, removing rules, or rebuilding, the Security Analyst
 Cloud logs are exported before they pass their retention window.
 
 ### **Integrity** 
-Each item is hashed when it’s collected, and the hash is checked again whenever the item is used. Analysts work on copies, never the originals.
+Each item is hashed when it’s collected, and the hash is checked again whenever the item is used. Analysts work on copies, never the original logs.
 
 ### **Chain of custody**
 Every item has a record of what it is, its hash, who collected it, when, and from where, plus every handoff after that. Evidence is stored somewhere separate from the domain, with access limited to the Incident Response team.
