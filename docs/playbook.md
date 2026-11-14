@@ -356,12 +356,42 @@ See the ATT&CK mapping file in ./docs.
 
 # **7\. Communication Plan**
 
-*PENDING — internal and external communication, approvals, templates.*
+During an incident, the team talks only through the out-of-band channel set up in Preparation (5.1). Normal email and chat are off limits until the Incident Commander says otherwise, because we have to assume the attacker can read them.
+
+The severity table in Section 4 decides who gets told what. The Incident Commander owns those updates and gives them at least every few hours for High and Critical incidents, sooner if something changes.
+
+Nothing goes outside the company without sign-off from the Incident Commander, legal team, and Communications. That includes questions from customers, partners, vendors, and the press. Employees who get asked about the incident send the person to Communications and don’t comment themselves.
+
+The legal team decides whether customers, regulators, or law enforcement have to be notified, and by when. Some notification deadlines start counting from when we first suspect a breach, so the legal team is brought in as soon as there’s any sign that sensitive data was accessed. 
 
 # **8\. Evidence Handling**
+### **Preservation**
+Before isolating, rebooting, removing rules, or rebuilding, the Security Analyst collects the evidence first. The order is as follows:
+- Memory from compromised hosts
+- Logs (cloud sign-in and audit, Windows Security events, VPN)
+- Disk images of systems that will be rebuilt 
 
-*PENDING — chain of custody, preservation, legal hold.*
+Cloud logs are exported before they pass their retention window.
+
+### **Integrity** 
+Each item is hashed when it’s collected, and the hash is checked again whenever the item is used. Analysts work on copies, never the originals.
+
+### **Chain of custody**
+Every item has a record of what it is, its hash, who collected it, when, and from where, plus every handoff after that. Evidence is stored somewhere separate from the domain, with access limited to the Incident Response team.
+
+### **Retention**
+Legal Counsel decides how long evidence is kept and can place a legal hold. Nothing related to the incident is deleted until Legal releases it.
 
 # **Appendix A. NIST SP 800-61 Rev. 3 / CSF 2.0 Mapping**
 
-*PENDING — table mapping the seven phases to Govern, Identify, Protect, Detect, Respond, Recover.*
+
+| Playbook Section | CSF 2.0 Function | Categories |
+| :---: | :---: | :---: |
+| 5.1: Preparation | Govern, Identify, Protect | Policy, roles, asset management, access control, training |
+| 5.2: Detection | Detect | DE.CM Continuous Monitoring, DE.AE Adverse Event Analysis |
+| 5.3: Analysis | Detect, Respond | DE.AE Adverse Event Analysis, RS.AN Incident Analysis |
+| 5.4: Containment | Respond | RS.MI Incident Mitigation, RS.MA Incident Management |
+| 5.5: Eradication | Respond | RS.MI Incident Mitigation |
+| 5.6: Recovery | Recover | RC.RP Incident Recovery Plan Execution, RC.CO Recovery Communication |
+| 5.7: Post-Incident  | Identify | ID.IM Improvement |
+| 7\. Communication | Respond, Recover | RS.CO Incident Response Reporting and Communication, RC.CO |
