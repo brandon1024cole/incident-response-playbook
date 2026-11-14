@@ -6,44 +6,10 @@ Harborline Freight Partners (fictional organization)
 
 | Field | Value |
 | :---- | :---- |
-| Version | 0.1 |
+| Version | 1.0 |
 | Author | Brandon Cole |
 | Framework | CompTIA CySA+ CS0-004 incident response lifecycle (7 phases), mapped to NIST SP 800-61 Rev. 3 / CSF 2.0 |
-| Status | Scoping |
-
-# **Contents**
-
-- [**1\. Purpose and Scope**](#1.-purpose-and-scope)
-
-- [**2\. Organization Profile**](#2.-organization-profile)
-
-- [**3\. Roles and Responsibilities**](#3.-roles-and-responsibilities)
-
-- [**4\. Severity Classification**](#4.-severity-classification)
-
-- [**5\. Incident Response Lifecycle**](#5.-incident-response-lifecycle)
-
-  - [5.1 Preparation](#5.1-preparation)
-
-  - [5.2 Detection](#5.2-detection)
-
-  - [5.3 Analysis](#5.3-analysis)
-
-  - [5.4 Containment](#5.4-containment)
-
-  - [5.5 Eradication](#5.5-eradication)
-
-  - [5.6 Recovery](#5.6-recovery)
-
-  - [5.7 Post-Incident Activity](#5.7-post-incident-activity)
-
-- [**6\. MITRE ATT\&CK Mapping**](#att&ck-mapping)
-
-- [**7\. Communication Plan**](#7.-communication-plan)
-
-- [**8\. Evidence Handling**](#8.-evidence-handling)
-
-- [**Appendix A. NIST SP 800-61 Rev. 3 / CSF 2.0 Mapping**](#appendix-a.-nist-sp-800-61-rev.-3-/-csf-2.0-mapping)	**[5](#heading=h.6mt8mr7elkkm)**
+| Status | Complete |
 
 # **1\. Purpose and Scope**
 
@@ -352,7 +318,7 @@ Exit Criteria:
 
 # **6\. MITRE ATT\&CK Mapping** 
 
-See the ATT&CK mapping file in ./docs.
+See [ATT&CK Mapping](attack-mapping.md) for the techniques this playbook covers, mapped against the design scenario.
 
 # **7\. Communication Plan**
 
