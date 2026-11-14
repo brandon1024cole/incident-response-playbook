@@ -37,7 +37,7 @@ Harborline Freight Partners (fictional organization)
 
   - [5.7 Post-Incident Activity](#5.7-post-incident-activity)
 
-- [**6\. MITRE ATT\&CK Mapping**](#6.-mitre-att&ck-mapping)
+- [**6\. MITRE ATT\&CK Mapping**](#att&ck-mapping)
 
 - [**7\. Communication Plan**](#7.-communication-plan)
 
@@ -351,7 +351,8 @@ Exit Criteria:
 *   Evidence retention decided
 
 # **6\. MITRE ATT\&CK Mapping** 
-*PENDING — techniques observed in this scenario and the detection or log source for each.*
+
+See the ATT&CK mapping file in ./docs.
 
 # **7\. Communication Plan**
 
